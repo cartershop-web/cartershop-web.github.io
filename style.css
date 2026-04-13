@@ -1,12 +1,12 @@
-/* Importamos la fuente romana real */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+/* Importamos la fuente Gótica (Blackletter) */
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 
 body {
     margin: 0;
     padding: 0;
     background-color: #000000;
     color: white;
-    font-family: 'Cinzel', serif; /* FUENTE ROMANA */
+    font-family: 'UnifrakturMaguntia', cursive; /* LA TIPOGRAFÍA DE TU IMAGEN */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -15,78 +15,77 @@ body {
     overflow-x: hidden;
 }
 
-/* El fondo romano oscuro */
+/* Fondo Romano de base */
 body::before {
     content: "";
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: url('fondo-negro.jpg') center/cover no-repeat;
-    opacity: 0.15;
+    opacity: 0.1;
     z-index: -3;
 }
 
-/* FANTASMAS: DERECHA ARRIBA Y IZQUIERDA ABAJO */
-body::after {
-    content: "";
+/* FANTASMAS GIGANTES EN LOS COSTADOS (ZONAS ROJAS) */
+.ghost-container {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image: url('fantasma-solo.png'), url('fantasma-solo.png');
-    background-repeat: no-repeat;
-    background-position: 
-        calc(100% + 50px) -50px, /* Derecha Arriba (un poco salido) */
-        -50px calc(100% + 50px); /* Izquierda Abajo (un poco salido) */
-    background-size: 350px; /* Tamaño grande y sutil */
-    opacity: 0.12;
-    z-index: -2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    z-index: -1;
 }
 
+.ghost {
+    position: absolute;
+    width: 350px; /* EL DOBLE DE GRANDE QUE LOS CUADROS */
+    height: auto;
+    opacity: 0.15; /* Sutil para que haya armonía */
+}
+
+/* Posiciones marcadas en rojo */
+.g1 { top: 10%; left: -50px; transform: rotate(-10deg); }   /* Arriba Izquierda */
+.g2 { top: 10%; right: -50px; transform: rotate(10deg); }  /* Arriba Derecha */
+.g3 { bottom: 10%; left: -30px; transform: rotate(5deg); } /* Abajo Izquierda */
+.g4 { bottom: 10%; right: -30px; transform: rotate(-5deg); }/* Abajo Derecha */
+
 header {
-    padding: 80px 20px 40px 20px;
+    padding: 50px 20px;
     text-align: center;
 }
 
 h1 {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    letter-spacing: 15px;
+    font-size: clamp(4rem, 15vw, 8rem); /* TIPOGRAFÍA GIGANTE */
     margin: 0;
-    font-weight: 700;
+    color: #ffffff;
+    text-transform: none; /* La fuente gótica no suele usarse en mayúsculas sostenidas */
 }
 
-/* CONTENEDOR DE LOS CUADROS */
+/* CUADROS PEQUEÑOS EN EL CENTRO (ZONA VERDE) */
 .gallery-container {
-    width: 90%;
-    max-width: 500px;
+    width: 60%; /* Más estrecho para que los fantasmas destaquen */
+    max-width: 380px; 
     z-index: 10;
+    margin-top: 20px;
 }
 
 .grid-insta {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 15px;
+    gap: 12px;
 }
 
-/* CUADROS VISIBLES EN TELÉFONO */
 .post-cuadro {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Esto los hace cuadrados siempre */
+    aspect-ratio: 1 / 1;
     background-color: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-sizing: border-box;
 }
 
-.post-cuadro img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
+/* Ajustes para que en el teléfono no se amontone todo */
 @media (max-width: 600px) {
-    body::after {
-        background-size: 250px; /* Un poco más chicos en cel para no estorbar */
-    }
-    h1 { letter-spacing: 8px; }
+    .ghost { width: 180px; } /* Ajuste de escala móvil */
+    h1 { font-size: 4.5rem; }
+    .gallery-container { width: 75%; }
 }
