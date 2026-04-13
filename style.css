@@ -1,117 +1,111 @@
-/* --- ESTILO CARTERSHOP PREMIUM (8 FOTOS) --- */
+/* --- DISEÑO ROMANO BLACK CARTERSHOP --- */
 body {
     margin: 0;
     padding: 0;
     background-color: #000000;
     color: white;
-    font-family: 'Times New Roman', Times, serif;
+    /* Tipografía Romana Clásica */
+    font-family: 'Cinzel', 'Times New Roman', serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
     position: relative;
+    overflow-x: hidden;
 }
 
-/* Fondo romano */
+/* Fondo de grabado romano */
 body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-image: url('fondo-negro.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.15;
+    opacity: 0.12;
     z-index: -3;
     pointer-events: none;
 }
 
-/* Fantasmas esparcidos */
+/* FANTASMAS GRANDES EN ESQUINAS ESPECÍFICAS */
 body::after {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-image: 
-        url('fantasma-solo.png'), 
-        url('fantasma-solo.png'), 
-        url('fantasma-solo.png'),
-        url('fantasma-solo.png');
+        url('fantasma-solo.png'), /* Esquina Superior Derecha */
+        url('fantasma-solo.png'); /* Esquina Inferior Izquierda */
     background-repeat: no-repeat;
     background-position: 
-        5% 10%,   /* Arriba izq */
-        95% 90%,  /* Abajo der */
-        92% 15%,  /* Arriba der */
-        8% 85%;   /* Abajo izq */
-    background-size: 150px, 200px, 110px, 140px;
-    opacity: 0.1;
+        95% 5%,   /* Arriba Derecha */
+        5% 95%;   /* Abajo Izquierda */
+    background-size: 320px; /* Tamaño grande para que destaque */
+    opacity: 0.18; /* Sutil pero visible */
     z-index: -2;
     pointer-events: none;
 }
 
 header {
-    padding: 70px 20px 30px 20px;
+    padding: 60px 20px 30px 20px;
     text-align: center;
 }
 
 h1 {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    letter-spacing: 12px;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    letter-spacing: 18px;
     text-transform: uppercase;
-    font-weight: 100;
+    font-weight: 200;
     margin: 0;
+    /* Refuerzo de estilo romano */
+    font-variant: small-caps;
 }
 
+/* CONTENEDOR DE CUADROS MÁS PEQUEÑOS */
 .gallery-container {
-    width: 95%;
-    max-width: 800px;
-    padding-bottom: 60px;
+    width: 85%;
+    max-width: 650px; /* Reducido para armonía */
+    margin: 0 auto;
+    padding-bottom: 50px;
 }
 
-/* Grid de 2 columnas */
 .grid-insta {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 12px;
+    gap: 25px; /* Más espacio entre cuadros para que no se vea amontonado */
 }
 
-/* Cuadros de productos (Contenedor del cambio de foto) */
 .post-cuadro {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    background-color: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .post-cuadro img {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
 }
 
-/* La segunda foto (b) está oculta por defecto */
-.foto-b {
-    opacity: 0;
-}
+.foto-b { opacity: 0; }
 
-/* Al tocar o pasar el mouse, la foto 'a' se oculta y sale la 'b' */
+/* Efecto de cambio al tocar/hover */
 .post-cuadro:hover .foto-a, 
-.post-cuadro:active .foto-a {
-    opacity: 0;
-}
-
+.post-cuadro:active .foto-a { opacity: 0; }
 .post-cuadro:hover .foto-b, 
-.post-cuadro:active .foto-b {
-    opacity: 1;
+.post-cuadro:active .foto-b { opacity: 1; }
+
+/* Ajuste para que en móvil los fantasmas no tapen todo */
+@media (max-width: 600px) {
+    body::after {
+        background-size: 200px;
+    }
+    h1 { letter-spacing: 8px; }
 }
