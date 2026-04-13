@@ -1,11 +1,12 @@
-/* --- DISEÑO ROMANO BLACK CARTERSHOP --- */
+/* Importamos la fuente romana real */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
 body {
     margin: 0;
     padding: 0;
     background-color: #000000;
     color: white;
-    /* Tipografía Romana Clásica */
-    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-family: 'Cinzel', serif; /* FUENTE ROMANA */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -14,98 +15,78 @@ body {
     overflow-x: hidden;
 }
 
-/* Fondo de grabado romano */
+/* El fondo romano oscuro */
 body::before {
     content: "";
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-image: url('fondo-negro.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.12;
+    background: url('fondo-negro.jpg') center/cover no-repeat;
+    opacity: 0.15;
     z-index: -3;
-    pointer-events: none;
 }
 
-/* FANTASMAS GRANDES EN ESQUINAS ESPECÍFICAS */
+/* FANTASMAS: DERECHA ARRIBA Y IZQUIERDA ABAJO */
 body::after {
     content: "";
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-image: 
-        url('fantasma-solo.png'), /* Esquina Superior Derecha */
-        url('fantasma-solo.png'); /* Esquina Inferior Izquierda */
+    background-image: url('fantasma-solo.png'), url('fantasma-solo.png');
     background-repeat: no-repeat;
     background-position: 
-        95% 5%,   /* Arriba Derecha */
-        5% 95%;   /* Abajo Izquierda */
-    background-size: 320px; /* Tamaño grande para que destaque */
-    opacity: 0.18; /* Sutil pero visible */
+        calc(100% + 50px) -50px, /* Derecha Arriba (un poco salido) */
+        -50px calc(100% + 50px); /* Izquierda Abajo (un poco salido) */
+    background-size: 350px; /* Tamaño grande y sutil */
+    opacity: 0.12;
     z-index: -2;
     pointer-events: none;
 }
 
 header {
-    padding: 60px 20px 30px 20px;
+    padding: 80px 20px 40px 20px;
     text-align: center;
 }
 
 h1 {
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
-    letter-spacing: 18px;
-    text-transform: uppercase;
-    font-weight: 200;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    letter-spacing: 15px;
     margin: 0;
-    /* Refuerzo de estilo romano */
-    font-variant: small-caps;
+    font-weight: 700;
 }
 
-/* CONTENEDOR DE CUADROS MÁS PEQUEÑOS */
+/* CONTENEDOR DE LOS CUADROS */
 .gallery-container {
-    width: 85%;
-    max-width: 650px; /* Reducido para armonía */
-    margin: 0 auto;
-    padding-bottom: 50px;
+    width: 90%;
+    max-width: 500px;
+    z-index: 10;
 }
 
 .grid-insta {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 25px; /* Más espacio entre cuadros para que no se vea amontonado */
+    gap: 15px;
 }
 
+/* CUADROS VISIBLES EN TELÉFONO */
 .post-cuadro {
-    position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1;
-    background-color: rgba(10, 10, 10, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    aspect-ratio: 1 / 1; /* Esto los hace cuadrados siempre */
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
 }
 
 .post-cuadro img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transition: opacity 0.4s ease;
+    display: block;
 }
 
-.foto-b { opacity: 0; }
-
-/* Efecto de cambio al tocar/hover */
-.post-cuadro:hover .foto-a, 
-.post-cuadro:active .foto-a { opacity: 0; }
-.post-cuadro:hover .foto-b, 
-.post-cuadro:active .foto-b { opacity: 1; }
-
-/* Ajuste para que en móvil los fantasmas no tapen todo */
 @media (max-width: 600px) {
     body::after {
-        background-size: 200px;
+        background-size: 250px; /* Un poco más chicos en cel para no estorbar */
     }
     h1 { letter-spacing: 8px; }
 }
