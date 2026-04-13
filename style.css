@@ -1,12 +1,13 @@
-/* Importamos la fuente Gótica (Blackletter) de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
+/* Importamos la fuente Gótica para el sitio y una Romana Cursiva (Script) para el título */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&display=swap');
 
 body {
     margin: 0;
     padding: 0;
-    background-color: #000000; /* Negro puro para mayor contraste */
+    background-color: #000000; /* Negro puro de base */
     color: white;
-    font-family: 'UnifrakturMaguntia', cursive; /* LA TIPOGRAFÍA GÓTICA */
+    /* Fuente gótica secundaria para el sitio */
+    font-family: 'Cinzel Decorative', cursive; 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -22,65 +23,69 @@ body::before {
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: url('fondo-negro.jpg') center/cover no-repeat;
-    opacity: 0.08; /* Super sutil para que no moleste */
+    opacity: 0.06; /* Super sutil para que no distraiga del fantasma */
     z-index: -3;
     pointer-events: none;
 }
 
-/* --- EL ARTE DE LOS FANTASMAS GIGANTES (El Zoom) --- */
+/* --- EL FANTASMA GIGANTE CENTRAL (El protagonista) --- */
 .ghost-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     pointer-events: none;
-    z-index: -1;
+    z-index: -2; /* Detrás del texto y la galería */
 }
 
-.ghost {
-    position: absolute;
-    width: 700px; /* TAMAÑO GIGANTE (Más de 2 veces los cuadros) */
+.central-ghost {
+    /* TAMAÑO GIGANTE (Ocupa casi toda la pantalla) */
+    width: 750px; 
     height: auto;
-    opacity: 0.12; /* Sutil pero presente */
-    transform-origin: center; /* Para que el giro sea natural */
+    opacity: 0.18; /* Sutil pero presente */
+    transform: rotate(5deg); /* Ligero giro para dinámica */
+    position: relative;
+    top: 5%; /* Un poco más arriba */
 }
 
-/* Posicionamiento agresivo en los costados */
-.g1 { top: 10%; left: -200px; transform: rotate(-10deg); }   /* Arriba Izquierda (Metido hacia el centro) */
-.g2 { top: 10%; right: -200px; transform: rotate(10deg); }  /* Arriba Derecha (Metido hacia el centro) */
-.g3 { bottom: 10%; left: -150px; transform: rotate(5deg); } /* Abajo Izquierda (Metido hacia el centro) */
-.g4 { bottom: 10%; right: -150px; transform: rotate(-5deg); }/* Abajo Derecha (Metido hacia el centro) */
-
-/* --- TÍTULO GIGANTE DE LA MARCA --- */
+/* --- EL TÍTULO GIGANTE (Estilo Portada de Revista) --- */
 header {
-    padding: 100px 20px 40px 20px; /* Mucho espacio arriba */
+    padding: 60px 20px;
     text-align: center;
+    z-index: 10; /* Sobre el fantasma central */
 }
 
 h1 {
-    font-size: clamp(6rem, 20vw, 14rem); /* TÍTULO GIGANTESCO */
-    letter-spacing: 20px; /* Mucho espacio entre letras góticas */
+    /* FUENTE ROMANA CURSIVA (Estilo caligrafía Script de la imagen) */
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(6rem, 20vw, 15rem); /* TÍTULO GIGANTESCO */
+    letter-spacing: 5px; /* Menos espacio para cursiva */
     margin: 0;
     color: #ffffff;
-    text-transform: none; /* Letras góticas en minúsculas y mayúsculas normales */
-    text-shadow: 0px 0px 25px rgba(255,255,255,0.25); /* Un brillo suave */
+    text-transform: none; /* Cursiva en minúsculas y mayúsculas normales */
+    /* Brillo suave superpuesto al fantasma */
+    text-shadow: 0px 0px 30px rgba(255,255,255,0.4);
+    opacity: 0.9; /* Un pelo transparente para integrarse */
 }
 
 /* --- CUADROS PEQUEÑOS Y CENTRADOS (Detalle minimalista) --- */
 .gallery-container {
     width: 70%; /* Estrecho para que la marca mande */
-    max-width: 300px; /* TAMAÑO PEQUEÑO Y COMPACTO */
+    max-width: 280px; /* TAMAÑO PEQUEÑO Y COMPACTO */
     z-index: 10;
     margin-top: 10px; /* Muy cerca del título */
-    margin-bottom: 100px; /* Espacio abajo para que respire */
+    margin-bottom: 80px; /* Espacio abajo para que respire */
     position: relative;
 }
 
 .grid-insta {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 8px; /* Espacio tipo Instagram pero más apretado */
+    gap: 8px; /* Espacio tipo Instagram apretado */
 }
 
 .post-cuadro {
@@ -93,13 +98,13 @@ h1 {
 /* --- AJUSTES PARA MÓVIL (Mismas proporciones) --- */
 @media (max-width: 600px) {
     /* Mismos proporciones agresivas, solo ajustando los valores absolutos */
-    .ghost { 
+    .central-ghost { 
         width: 380px; /* Un pelo más chicos en cel para no tapar, pero aún gigantes */
-        background-position: -50px, -50px; /* Más metidos */
+        top: 15%; /* Más abajo en el cel para no tapar el título */
     } 
     h1 { 
-        font-size: clamp(5rem, 15vw, 9rem); /* Gigante pero que quepa en la pantalla del cel */
-        letter-spacing: 10px; 
+        font-size: clamp(5rem, 15vw, 10rem); /* Gigante pero que quepa en la pantalla del cel */
+        letter-spacing: 5px; 
     }
     .gallery-container { width: 85%; }
 }
