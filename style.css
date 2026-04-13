@@ -1,110 +1,130 @@
-/* Importamos la fuente Gótica para el sitio y una Romana Cursiva (Script) para el título */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&display=swap');
+:root {
+    --gold: #c5a059;
+    --dark: #0a0a0a;
+    --glass: rgba(255, 255, 255, 0.05);
+}
 
 body {
     margin: 0;
-    padding: 0;
-    background-color: #000000; /* Negro puro de base */
+    background-color: var(--dark);
     color: white;
-    /* Fuente gótica secundaria para el sitio */
-    font-family: 'Cinzel Decorative', cursive; 
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    overflow-x: hidden; /* Evita barras de desplazamiento horizontales */
+    font-family: 'Cinzel', serif; /* Tipografía Romana */
+    overflow-x: hidden;
 }
 
-/* Fondo Romano de base (muy sutil) */
-body::before {
-    content: "";
+/* Capa de Arte: Fantasmas Gigantes */
+.art-layer {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url('fondo-negro.jpg') center/cover no-repeat;
-    opacity: 0.06; /* Super sutil para que no distraiga del fantasma */
-    z-index: -3;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
     pointer-events: none;
 }
 
-/* --- EL FANTASMA GIGANTE CENTRAL (El protagonista) --- */
-.ghost-container {
-    position: fixed;
+.bg-ghost {
+    position: absolute;
+    width: 60vw; /* Gigantes como pediste */
+    max-width: 800px;
+    opacity: 0.1;
+    filter: grayscale(1);
+}
+
+.g-top-left { top: -10%; left: -10%; transform: rotate(-15deg); }
+.g-bottom-right { bottom: -10%; right: -10%; transform: rotate(15deg); }
+
+/* Navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 5%;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-    z-index: -2; /* Detrás del texto y la galería */
+    z-index: 100;
 }
 
-.central-ghost {
-    /* TAMAÑO GIGANTE (Ocupa casi toda la pantalla) */
-    width: 750px; 
-    height: auto;
-    opacity: 0.18; /* Sutil pero presente */
-    transform: rotate(5deg); /* Ligero giro para dinámica */
-    position: relative;
-    top: 5%; /* Un poco más arriba */
+.logo { font-size: 1.8rem; font-weight: 700; letter-spacing: 5px; }
+.btn-contact {
+    background: white;
+    color: black;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 2px;
+    transition: 0.3s;
 }
 
-/* --- EL TÍTULO GIGANTE (Estilo Portada de Revista) --- */
-header {
-    padding: 60px 20px;
+/* Header Estilo Instagram/Pinterest */
+.hero {
     text-align: center;
-    z-index: 10; /* Sobre el fantasma central */
+    padding: 100px 20px;
 }
 
 h1 {
-    /* FUENTE ROMANA CURSIVA (Estilo caligrafía Script de la imagen) */
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(6rem, 20vw, 15rem); /* TÍTULO GIGANTESCO */
-    letter-spacing: 5px; /* Menos espacio para cursiva */
+    font-size: clamp(3rem, 15vw, 8rem);
     margin: 0;
-    color: #ffffff;
-    text-transform: none; /* Cursiva en minúsculas y mayúsculas normales */
-    /* Brillo suave superpuesto al fantasma */
-    text-shadow: 0px 0px 30px rgba(255,255,255,0.4);
-    opacity: 0.9; /* Un pelo transparente para integrarse */
+    letter-spacing: 15px;
+    font-weight: 400;
 }
 
-/* --- CUADROS PEQUEÑOS Y CENTRADOS (Detalle minimalista) --- */
-.gallery-container {
-    width: 70%; /* Estrecho para que la marca mande */
-    max-width: 280px; /* TAMAÑO PEQUEÑO Y COMPACTO */
-    z-index: 10;
-    margin-top: 10px; /* Muy cerca del título */
-    margin-bottom: 80px; /* Espacio abajo para que respire */
-    position: relative;
+.subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    opacity: 0.7;
 }
 
-.grid-insta {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 8px; /* Espacio tipo Instagram apretado */
+/* Cuadrícula Pinterest */
+.container { padding: 0 5% 100px; }
+.pinterest-grid {
+    column-count: 2; /* Dos columnas en móvil */
+    column-gap: 20px;
 }
 
-.post-cuadro {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Esto obliga a que sean cuadrados siempre */
-    background-color: rgba(255, 255, 255, 0.03); /* Fondo gris casi negro */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde muy sutil */
+@media (min-width: 900px) {
+    .pinterest-grid { column-count: 3; }
 }
 
-/* --- AJUSTES PARA MÓVIL (Mismas proporciones) --- */
-@media (max-width: 600px) {
-    /* Mismos proporciones agresivas, solo ajustando los valores absolutos */
-    .central-ghost { 
-        width: 380px; /* Un pelo más chicos en cel para no tapar, pero aún gigantes */
-        top: 15%; /* Más abajo en el cel para no tapar el título */
-    } 
-    h1 { 
-        font-size: clamp(5rem, 15vw, 10rem); /* Gigante pero que quepa en la pantalla del cel */
-        letter-spacing: 5px; 
-    }
-    .gallery-container { width: 85%; }
+.card {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.card:hover { transform: translateY(-5px); }
+
+.image-wrapper { width: 100%; position: relative; }
+.image-wrapper img { width: 100%; display: block; }
+
+/* Soporte para dos fotos por post */
+.image-wrapper.double {
+    display: flex;
+    gap: 2px;
+}
+.image-wrapper.double img, .placeholder-box {
+    width: 50%;
+    aspect-ratio: 2/3;
+    background: #1a1a1a;
+}
+
+.card-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-info h3 { font-size: 0.9rem; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
+.card-info span { font-size: 0.7rem; opacity: 0.5; }
+
+footer {
+    padding: 50px;
+    text-align: center;
+    border-top: 1px solid var(--glass);
+    font-size: 0.8rem;
+    opacity: 0.6;
 }
