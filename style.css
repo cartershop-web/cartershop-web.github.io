@@ -1,79 +1,75 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
-    background: #000 url('fondo-negro.jpg') center/cover fixed no-repeat;
-    color: white;
-    font-family: 'UnifrakturMaguntia', cursive;
+    /* FONDO NEGRO EN TODA LA PÁGINA */
+    background: #000 url('fondo-negro.jpg') center/cover no-repeat fixed;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Mantiene el zoom sin barras de scroll */
-}
-
-/* --- CAPA DEL FANTASMA --- */
-.ghost-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; /* Al fondo */
-    display: flex;
-    align-items: center;
-    pointer-events: none;
-}
-
-.walking-ghost {
-    height: 75vh; /* ZOOM AL FANTASMA */
-    width: auto;
-    opacity: 0.5;
-    position: absolute;
-    left: -5%; /* Posición inicial izquierda */
-    filter: drop-shadow(0 0 30px rgba(255,255,255,0.1));
-}
-
-/* --- BLOQUE CENTRAL (ZOOM Y CENTRADO) --- */
-.center-content {
-    position: relative;
-    z-index: 10; /* Por encima del fantasma */
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    overflow: hidden;
+    font-family: 'UnifrakturMaguntia', cursive;
 }
 
 header {
-    margin-bottom: 20px; /* Separación pequeña con los posts */
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+    z-index: 10;
 }
 
 h1 {
-    font-size: clamp(5.5rem, 25vw, 13rem); /* ZOOM MASIVO AL TEXTO */
+    color: white;
+    /* ZOOM AL TEXTO */
+    font-size: clamp(4rem, 15vw, 10rem);
     margin: 0;
-    letter-spacing: 2px;
-    text-align: center;
-    line-height: 1;
+    text-transform: uppercase;
 }
 
-.grid-container {
+/* FANTASMA A LA IZQUIERDA (CAPA DE ATRÁS) */
+.fantasma {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60vh;
+    width: auto;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+/* CUADROS EN TODO EL MEDIO */
+.contenedor-posts {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    width: 90%;
+    max-width: 500px;
+}
+
+.grid-posts {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
-    width: 95%;
-    max-width: 550px; /* CUADROS MÁS GRANDES QUE EL FANTASMA */
 }
 
-.post-box {
+.cuadro {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    background: rgba(0, 0, 0, 0.9);
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 60px rgba(0,0,0,1);
+    aspect-ratio: 1/1;
+    background: rgba(20, 20, 20, 0.9);
+    border: 2px solid #333;
 }
 
-/* AJUSTE PARA MÓVIL AGRESIVO */
+/* AJUSTE MÓVIL */
 @media (max-width: 600px) {
-    h1 { font-size: 7rem; }
-    .walking-ghost { height: 50vh; left: -10%; }
-    .grid-container { max-width: 380px; gap: 10px; }
+    h1 { font-size: 5rem; }
+    .fantasma { height: 40vh; left: 0; }
+    .contenedor-posts { max-width: 320px; }
 }
