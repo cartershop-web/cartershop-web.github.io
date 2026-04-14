@@ -1,126 +1,79 @@
-/* --- ESTILO ZOOM TOTAL (SIN RECORTES) --- */
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
-
 body {
     margin: 0;
     padding: 0;
-    background-color: #000000;
+    background: #000 url('fondo-negro.jpg') center/cover fixed no-repeat;
     color: white;
     font-family: 'UnifrakturMaguntia', cursive;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    overflow-x: hidden;
-    position: relative;
+    overflow: hidden; /* Mantiene el zoom sin barras de scroll */
 }
 
-/* Fondo Romano Sutil */
-body::before {
-    content: "";
+/* --- CAPA DEL FANTASMA --- */
+.ghost-background {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url('fondo-negro.jpg') center/cover no-repeat;
-    opacity: 0.1;
-    z-index: -3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Al fondo */
+    display: flex;
+    align-items: center;
+    pointer-events: none;
 }
 
-/* --- CONTENEDOR DE PERSPECTIVA --- */
-.main-wrapper {
-    width: 100%;
+.walking-ghost {
+    height: 75vh; /* ZOOM AL FANTASMA */
+    width: auto;
+    opacity: 0.5;
+    position: absolute;
+    left: -5%; /* Posición inicial izquierda */
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.1));
+}
+
+/* --- BLOQUE CENTRAL (ZOOM Y CENTRADO) --- */
+.center-content {
+    position: relative;
+    z-index: 10; /* Por encima del fantasma */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0;
+    width: 100%;
 }
 
-/* --- TEXTO ARRIBA (GRANDE PERO DENTRO) --- */
 header {
-    width: 100%;
-    text-align: center;
-    padding: 40px 0;
+    margin-bottom: 20px; /* Separación pequeña con los posts */
 }
 
 h1 {
-    font-size: clamp(3.5rem, 15vw, 8rem); /* Ajuste dinámico para que no se corte */
+    font-size: clamp(5.5rem, 25vw, 13rem); /* ZOOM MASIVO AL TEXTO */
     margin: 0;
-    letter-spacing: 5px;
-    padding: 0 15px; /* Margen de seguridad para que no toque los bordes */
-    word-wrap: break-word;
+    letter-spacing: 2px;
+    text-align: center;
+    line-height: 1;
 }
 
-/* --- EL CONTENIDO CENTRAL (FANTASMA + CUADROS) --- */
-.content-layout {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 1200px;
-    position: relative;
-    padding: 20px 0;
-}
-
-/* FANTASMA A LA IZQUIERDA (GIGANTE PERO VISIBLE) */
-.ghost-aside {
-    width: 35%; /* Ocupa buena parte de la izquierda */
-    display: flex;
-    justify-content: center;
-}
-
-.ghost-aside img {
-    width: 100%;
-    max-width: 400px; /* Tamaño masivo */
-    height: auto;
-    filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
-}
-
-/* CUADROS CENTRALES (LOS MÁS GRANDES) */
-.gallery-container {
-    width: 60%; /* Protagonismo central */
-    display: flex;
-    justify-content: center;
-}
-
-.grid-insta {
+.grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    width: 100%;
-    max-width: 500px; /* Cuadros masivos */
+    gap: 15px;
+    width: 95%;
+    max-width: 550px; /* CUADROS MÁS GRANDES QUE EL FANTASMA */
 }
 
-.post-cuadro {
+.post-box {
     width: 100%;
     aspect-ratio: 1 / 1;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 60px rgba(0,0,0,1);
 }
 
-/* BOTÓN DE CONTACTO (PROFESIONAL) */
-.btn-whatsapp {
-    margin-top: 50px;
-    padding: 15px 40px;
-    background-color: #ffffff;
-    color: #000000;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-
-/* --- AJUSTE MÓVIL (ZOOM ADAPTADO) --- */
-@media (max-width: 768px) {
-    .content-layout {
-        flex-direction: row; /* Mantenemos el fantasma al lado, no abajo */
-        padding: 0 5px;
-    }
-    
-    .ghost-aside { width: 30%; }
-    .gallery-container { width: 70%; }
-    
-    h1 { font-size: 4rem; letter-spacing: 2px; }
+/* AJUSTE PARA MÓVIL AGRESIVO */
+@media (max-width: 600px) {
+    h1 { font-size: 7rem; }
+    .walking-ghost { height: 50vh; left: -10%; }
+    .grid-container { max-width: 380px; gap: 10px; }
 }
