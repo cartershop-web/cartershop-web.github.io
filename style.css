@@ -5,15 +5,18 @@
 }
 
 body {
-    background: #000;
+    background-color: #000;
     height: 100vh;
     width: 100vw;
-    overflow: hidden; /* Prohibido el scroll */
+    overflow: hidden; /* Prohibido el scroll para que no se mueva nada */
     font-family: 'UnifrakturMaguntia', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* DETALLE: FONDO NEGRO EN TODA LA PÁGINA */
-.background-fix {
+.overlay-fondo {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,59 +26,57 @@ body {
     z-index: -1;
 }
 
-/* DETALLE: TEXTO ARRIBA EN EL CENTRO */
-.marca-arriba {
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-size: clamp(4rem, 15vw, 10rem); /* ZOOM AL TEXTO */
-    text-align: center;
-    width: 100%;
-    z-index: 20;
-}
-
 /* DETALLE: FANTASMA A LA IZQUIERDA */
-.fantasma-base {
+.fantasma-fijo {
     position: absolute;
-    left: -5%; /* Zoom que lo saca un poco de pantalla */
+    left: -5%; /* Zoom que lo saca un pelo del borde */
     top: 50%;
     transform: translateY(-50%);
-    height: 70vh; /* FANTASMA GIGANTE */
+    height: 75vh; /* FANTASMA GIGANTE DETRÁS */
     width: auto;
     opacity: 0.6;
-    z-index: 1; /* Por DETRÁS de los cuadros */
+    z-index: 1;
+}
+
+/* CONTENEDOR MAESTRO */
+.contenedor-principal {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* DETALLE: TEXTO ARRIBA EN EL CENTRO */
+.titulo-marca {
+    color: white;
+    font-size: clamp(4rem, 18vw, 11rem); /* ZOOM MASIVO AL TEXTO */
+    text-align: center;
+    margin-bottom: 20px; /* Separación fija con los cuadros */
+    text-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
 /* DETALLE: CUADROS EN TODO EL MEDIO */
-.contenedor-medio {
-    position: absolute;
-    top: 55%; /* Un pelo más abajo del centro para dejar aire al texto */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 500px;
-    z-index: 10; /* Al frente */
-}
-
-.grid-posts {
+.grid-catalogo {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
+    width: 90%;
+    max-width: 550px; /* CUADROS GRANDES */
 }
 
-.cuadro {
+.post {
     width: 100%;
     aspect-ratio: 1/1;
     background: rgba(0, 0, 0, 0.9);
     border: 2px solid #333;
-    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    box-shadow: 0 0 40px rgba(0,0,0,1);
 }
 
-/* AJUSTE PARA MÓVIL PARA QUE NO SE AMONTONE */
+/* AJUSTE MÓVIL (Para que no se corte el nombre) */
 @media (max-width: 600px) {
-    .marca-arriba { font-size: 5.5rem; top: 8%; }
-    .fantasma-base { height: 45vh; left: -10%; }
-    .contenedor-medio { max-width: 340px; top: 60%; }
+    .titulo-marca { font-size: 5.5rem; }
+    .fantasma-fijo { height: 50vh; left: -10%; }
+    .grid-catalogo { max-width: 350px; }
 }
