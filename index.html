@@ -3,26 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARTERSHOP</title>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Cartershop</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 
-    <div class="overlay-fondo"></div>
+    <div class="background"></div>
 
-    <img src="fantasma-solo.png" class="fantasma-fijo" alt="Ghost">
+    <header>
+        <h1>Cartershop</h1>
+    </header>
 
-    <div class="contenedor-principal">
-        <h1 class="titulo-marca">Cartershop</h1>
-        
-        <div class="grid-catalogo">
-            <div class="post"></div>
-            <div class="post"></div>
-            <div class="post"></div>
-            <div class="post"></div>
+    <main>
+
+        <!-- Fantasma -->
+        <div class="ghost">
+            <img src="fantasma-solo.png" alt="Fantasma">
+        </div>
+
+        <!-- Cuadro central -->
+        <section class="grid">
+
+            <div class="post" data-producto="Producto 1" data-img1="prod1a.jpg" data-img2="prod1b.jpg">
+                <div class="overlay">Producto 1</div>
+            </div>
+
+            <div class="post" data-producto="Producto 2" data-img1="prod2a.jpg" data-img2="prod2b.jpg">
+                <div class="overlay">Producto 2</div>
+            </div>
+
+            <div class="post" data-producto="Producto 3" data-img1="prod3a.jpg" data-img2="prod3b.jpg">
+                <div class="overlay">Producto 3</div>
+            </div>
+
+            <div class="post" data-producto="Producto 4" data-img1="prod4a.jpg" data-img2="prod4b.jpg">
+                <div class="overlay">Producto 4</div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="cerrar">&times;</span>
+            <h2 id="tituloModal"></h2>
+            <div class="modal-imgs">
+                <img id="imgModal1">
+                <img id="imgModal2">
+            </div>
         </div>
     </div>
+
+<script>
+    // Abrir modal
+    document.querySelectorAll('.post').forEach(post => {
+        post.addEventListener('click', () => {
+            document.getElementById('tituloModal').textContent = post.dataset.producto;
+            document.getElementById('imgModal1').src = post.dataset.img1;
+            document.getElementById('imgModal2').src = post.dataset.img2;
+            document.getElementById('modal').style.display = 'flex';
+        });
+    });
+
+    // Cerrar modal
+    document.getElementById('cerrar').onclick = () => {
+        document.getElementById('modal').style.display = 'none';
+    };
+</script>
 
 </body>
 </html>
