@@ -1,130 +1,126 @@
-:root {
-    --gold: #c5a059;
-    --dark: #0a0a0a;
-    --glass: rgba(255, 255, 255, 0.05);
-}
+/* --- ESTILO ZOOM TOTAL (SIN RECORTES) --- */
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 
 body {
     margin: 0;
-    background-color: var(--dark);
+    padding: 0;
+    background-color: #000000;
     color: white;
-    font-family: 'Cinzel', serif; /* Tipografía Romana */
-    overflow-x: hidden;
-}
-
-/* Capa de Arte: Fantasmas Gigantes */
-.art-layer {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.bg-ghost {
-    position: absolute;
-    width: 60vw; /* Gigantes como pediste */
-    max-width: 800px;
-    opacity: 0.1;
-    filter: grayscale(1);
-}
-
-.g-top-left { top: -10%; left: -10%; transform: rotate(-15deg); }
-.g-bottom-right { bottom: -10%; right: -10%; transform: rotate(15deg); }
-
-/* Navegación */
-.navbar {
+    font-family: 'UnifrakturMaguntia', cursive;
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
-    padding: 30px 5%;
+    flex-direction: column;
     align-items: center;
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    overflow-x: hidden;
+    position: relative;
 }
 
-.logo { font-size: 1.8rem; font-weight: 700; letter-spacing: 5px; }
-.btn-contact {
-    background: white;
-    color: black;
-    padding: 10px 25px;
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: bold;
-    border-radius: 2px;
-    transition: 0.3s;
+/* Fondo Romano Sutil */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('fondo-negro.jpg') center/cover no-repeat;
+    opacity: 0.1;
+    z-index: -3;
 }
 
-/* Header Estilo Instagram/Pinterest */
-.hero {
+/* --- CONTENEDOR DE PERSPECTIVA --- */
+.main-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+/* --- TEXTO ARRIBA (GRANDE PERO DENTRO) --- */
+header {
+    width: 100%;
     text-align: center;
-    padding: 100px 20px;
+    padding: 40px 0;
 }
 
 h1 {
-    font-size: clamp(3rem, 15vw, 8rem);
+    font-size: clamp(3.5rem, 15vw, 8rem); /* Ajuste dinámico para que no se corte */
     margin: 0;
-    letter-spacing: 15px;
-    font-weight: 400;
+    letter-spacing: 5px;
+    padding: 0 15px; /* Margen de seguridad para que no toque los bordes */
+    word-wrap: break-word;
 }
 
-.subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.5rem;
-    opacity: 0.7;
-}
-
-/* Cuadrícula Pinterest */
-.container { padding: 0 5% 100px; }
-.pinterest-grid {
-    column-count: 2; /* Dos columnas en móvil */
-    column-gap: 20px;
-}
-
-@media (min-width: 900px) {
-    .pinterest-grid { column-count: 3; }
-}
-
-.card {
-    break-inside: avoid;
-    margin-bottom: 20px;
-    background: var(--glass);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 4px;
-    overflow: hidden;
-    transition: transform 0.3s;
-}
-
-.card:hover { transform: translateY(-5px); }
-
-.image-wrapper { width: 100%; position: relative; }
-.image-wrapper img { width: 100%; display: block; }
-
-/* Soporte para dos fotos por post */
-.image-wrapper.double {
+/* --- EL CONTENIDO CENTRAL (FANTASMA + CUADROS) --- */
+.content-layout {
     display: flex;
-    gap: 2px;
-}
-.image-wrapper.double img, .placeholder-box {
-    width: 50%;
-    aspect-ratio: 2/3;
-    background: #1a1a1a;
-}
-
-.card-info {
-    padding: 15px;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    padding: 20px 0;
 }
 
-.card-info h3 { font-size: 0.9rem; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
-.card-info span { font-size: 0.7rem; opacity: 0.5; }
+/* FANTASMA A LA IZQUIERDA (GIGANTE PERO VISIBLE) */
+.ghost-aside {
+    width: 35%; /* Ocupa buena parte de la izquierda */
+    display: flex;
+    justify-content: center;
+}
 
-footer {
-    padding: 50px;
-    text-align: center;
-    border-top: 1px solid var(--glass);
-    font-size: 0.8rem;
-    opacity: 0.6;
+.ghost-aside img {
+    width: 100%;
+    max-width: 400px; /* Tamaño masivo */
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
+}
+
+/* CUADROS CENTRALES (LOS MÁS GRANDES) */
+.gallery-container {
+    width: 60%; /* Protagonismo central */
+    display: flex;
+    justify-content: center;
+}
+
+.grid-insta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 500px; /* Cuadros masivos */
+}
+
+.post-cuadro {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* BOTÓN DE CONTACTO (PROFESIONAL) */
+.btn-whatsapp {
+    margin-top: 50px;
+    padding: 15px 40px;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+/* --- AJUSTE MÓVIL (ZOOM ADAPTADO) --- */
+@media (max-width: 768px) {
+    .content-layout {
+        flex-direction: row; /* Mantenemos el fantasma al lado, no abajo */
+        padding: 0 5px;
+    }
+    
+    .ghost-aside { width: 30%; }
+    .gallery-container { width: 70%; }
+    
+    h1 { font-size: 4rem; letter-spacing: 2px; }
 }
