@@ -1,76 +1,81 @@
-/* DETALLE 5: FONDO NEGRO EN TODA LA PÁGINA */
-body {
+* {
     margin: 0;
     padding: 0;
-    background: #000 url('fondo-negro.jpg') center/cover no-repeat fixed;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
     height: 100vh;
     width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
+    overflow: hidden; /* Prohibido el scroll */
     font-family: 'UnifrakturMaguntia', cursive;
 }
 
-/* POSICIÓN TEXTO ARRIBA */
-header {
+/* DETALLE: FONDO NEGRO EN TODA LA PÁGINA */
+.background-fix {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding-top: 40px;
+    height: 100%;
+    background: url('fondo-negro.jpg') center/cover no-repeat;
+    z-index: -1;
+}
+
+/* DETALLE: TEXTO ARRIBA EN EL CENTRO */
+.marca-arriba {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: clamp(4rem, 15vw, 10rem); /* ZOOM AL TEXTO */
     text-align: center;
+    width: 100%;
     z-index: 20;
 }
 
-h1 {
-    color: white;
-    /* DETALLE 4: MACRO ZOOM TEXTO */
-    font-size: clamp(5rem, 20vw, 12rem);
-    margin: 0;
-    line-height: 1;
-}
-
-/* POSICIÓN FANTASMA IZQUIERDA */
-.fantasma-container {
-    position: fixed;
+/* DETALLE: FANTASMA A LA IZQUIERDA */
+.fantasma-base {
+    position: absolute;
+    left: -5%; /* Zoom que lo saca un poco de pantalla */
     top: 50%;
-    left: 10px;
     transform: translateY(-50%);
-    z-index: 1; /* Detrás de los cuadros */
-}
-
-.fantasma-img {
-    height: 60vh; /* Zoom al fantasma */
+    height: 70vh; /* FANTASMA GIGANTE */
     width: auto;
     opacity: 0.6;
+    z-index: 1; /* Por DETRÁS de los cuadros */
 }
 
-/* POSICIÓN CUADROS EN TODO EL MEDIO */
-.centro-total {
-    position: fixed;
-    top: 55%;
+/* DETALLE: CUADROS EN TODO EL MEDIO */
+.contenedor-medio {
+    position: absolute;
+    top: 55%; /* Un pelo más abajo del centro para dejar aire al texto */
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10; /* Al frente para que el fantasma pase por detrás */
     width: 90%;
-    max-width: 550px;
+    max-width: 500px;
+    z-index: 10; /* Al frente */
 }
 
-.grid-catalogo {
+.grid-posts {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
 
-.post {
+.cuadro {
     width: 100%;
     aspect-ratio: 1/1;
     background: rgba(0, 0, 0, 0.9);
-    border: 2px solid #222;
+    border: 2px solid #333;
     box-shadow: 0 0 40px rgba(0,0,0,0.8);
 }
 
-/* AJUSTE MÓVIL PARA MANTENER EL ZOOM */
+/* AJUSTE PARA MÓVIL PARA QUE NO SE AMONTONE */
 @media (max-width: 600px) {
-    h1 { font-size: 6.5rem; }
-    .centro-total { max-width: 360px; }
-    .fantasma-img { height: 45vh; }
+    .marca-arriba { font-size: 5.5rem; top: 8%; }
+    .fantasma-base { height: 45vh; left: -10%; }
+    .contenedor-medio { max-width: 340px; top: 60%; }
 }
