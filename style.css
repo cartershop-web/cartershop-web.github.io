@@ -5,78 +5,128 @@
 }
 
 body {
-    background-color: #000;
-    height: 100vh;
     width: 100vw;
-    overflow: hidden; /* Prohibido el scroll para que no se mueva nada */
-    font-family: 'UnifrakturMaguntia', cursive;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* Fondo */
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("fondo-negro.jpg") center/cover no-repeat;
+    filter: brightness(0.7);
+    transform: scale(1.2); /* efecto zoom */
+    z-index: -1;
+}
+
+/* Texto arriba */
+header {
+    position: absolute;
+    top: 3%;
+    width: 100%;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+}
+
+/* Layout principal */
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+}
+
+/* Fantasma */
+.ghost img {
+    width: 260px; /* más pequeño que los cuadros */
+    transform: scale(1.2); /* efecto zoom */
+}
+
+/* Cuadro central */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 260px);
+    grid-template-rows: repeat(2, 260px);
+    gap: 25px;
+    transform: scale(1.25); /* cuadros más grandes */
+}
+
+/* Cada post */
+.post {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Hover estilo Instagram */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: rgba(0,0,0,0.7);
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: .3s;
+    font-size: 1.2rem;
 }
 
-/* DETALLE: FONDO NEGRO EN TODA LA PÁGINA */
-.overlay-fondo {
+.post:hover .overlay {
+    height: 100%;
+    opacity: 1;
+}
+
+/* Modal */
+.modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('fondo-negro.jpg') center/cover no-repeat;
-    z-index: -1;
-}
-
-/* DETALLE: FANTASMA A LA IZQUIERDA */
-.fantasma-fijo {
-    position: absolute;
-    left: -5%; /* Zoom que lo saca un pelo del borde */
-    top: 50%;
-    transform: translateY(-50%);
-    height: 75vh; /* FANTASMA GIGANTE DETRÁS */
-    width: auto;
-    opacity: 0.6;
-    z-index: 1;
-}
-
-/* CONTENEDOR MAESTRO */
-.contenedor-principal {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
     align-items: center;
 }
 
-/* DETALLE: TEXTO ARRIBA EN EL CENTRO */
-.titulo-marca {
-    color: white;
-    font-size: clamp(4rem, 18vw, 11rem); /* ZOOM MASIVO AL TEXTO */
+.modal-content {
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+    width: 70%;
     text-align: center;
-    margin-bottom: 20px; /* Separación fija con los cuadros */
-    text-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
-/* DETALLE: CUADROS EN TODO EL MEDIO */
-.grid-catalogo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 90%;
-    max-width: 550px; /* CUADROS GRANDES */
+.modal-imgs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
-.post {
-    width: 100%;
-    aspect-ratio: 1/1;
-    background: rgba(0, 0, 0, 0.9);
-    border: 2px solid #333;
-    box-shadow: 0 0 40px rgba(0,0,0,1);
+.modal-imgs img {
+    width: 40%;
+    border-radius: 10px;
 }
 
-/* AJUSTE MÓVIL (Para que no se corte el nombre) */
-@media (max-width: 600px) {
-    .titulo-marca { font-size: 5.5rem; }
-    .fantasma-fijo { height: 50vh; left: -10%; }
-    .grid-catalogo { max-width: 350px; }
+#cerrar {
+    float: right;
+    font-size: 2rem;
+    cursor: pointer;
 }
