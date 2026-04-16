@@ -13,20 +13,20 @@ body {
     position: relative;
 }
 
-/* Fondo con zoom fuerte */
+/* Fondo con zoom */
 .background {
     position: absolute;
     inset: 0;
     background: url("fondo-negro.jpg") center/cover no-repeat;
     filter: brightness(0.75);
-    transform: scale(1.35);
+    transform: scale(1.25);
     z-index: -1;
 }
 
-/* Título centrado arriba */
+/* Título arriba centrado */
 header {
     position: absolute;
-    top: 4%;
+    top: 4vh;
     width: 100%;
     text-align: center;
     z-index: 2;
@@ -34,36 +34,35 @@ header {
 
 header h1 {
     font-family: "Cinzel", serif;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    letter-spacing: 4px;
+    font-size: 3vh;
+    letter-spacing: 0.5vh;
 }
 
-/* Layout principal: fantasma izquierda, grid centro */
+/* Layout principal: fantasma + bloque 2x2 */
 main {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(30px, 6vw, 90px);
-    padding-inline: 20px;
+    gap: 5vw;
 }
 
-/* Fantasma grande pero más pequeño que el cuadro */
+/* Fantasma: grande pero más pequeño que el cuadro */
 .ghost img {
-    height: clamp(40vh, 55vh, 60vh);
+    height: 40vh;
     transform: scale(1.1);
 }
 
-/* Grid 2x2 formando un solo cuadro grande */
+/* Bloque 2x2 centrado, cuadrado y grande */
 .grid {
+    width: 40vh;              /* mismo en ancho y alto para que sea cuadrado */
+    height: 40vh;
     display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 220px));
-    grid-template-rows: repeat(2, minmax(140px, 220px));
-    gap: 0;
-    border-radius: 18px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    border-radius: 2vh;
     overflow: hidden;
-    transform: scale(1.25);
 }
 
 /* Cada post ocupa 1/4 del cuadro */
@@ -98,40 +97,11 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+    font-size: 2vh;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .post:hover .overlay {
     opacity: 1;
-}
-
-/* Ajuste para móviles: todo sigue visible sin scroll */
-@media (max-width: 768px) {
-    body {
-        overflow: hidden;
-    }
-
-    main {
-        flex-direction: column;
-        justify-content: center;
-        gap: 20px;
-        padding-top: 40px;
-    }
-
-    header {
-        top: 2%;
-    }
-
-    .ghost img {
-        height: 26vh;
-        transform: scale(1.05);
-    }
-
-    .grid {
-        transform: scale(1.05);
-        grid-template-columns: repeat(2, 140px);
-        grid-template-rows: repeat(2, 140px);
-    }
 }
