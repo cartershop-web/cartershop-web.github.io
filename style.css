@@ -13,95 +13,111 @@ body {
     position: relative;
 }
 
-/* Fondo con zoom */
+/* Fondo con zoom cinematográfico */
 .background {
     position: absolute;
     inset: 0;
     background: url("fondo-negro.jpg") center/cover no-repeat;
     filter: brightness(0.75);
-    transform: scale(1.25);
+    transform: scale(1.45); /* ZOOM FUERTE */
     z-index: -1;
 }
 
-/* Título arriba centrado */
-header {
+/* Escena completa */
+.scene {
     position: absolute;
-    top: 4vh;
-    width: 100%;
-    text-align: center;
-    z-index: 2;
-}
-
-header h1 {
-    font-family: "Cinzel", serif;
-    font-size: 3vh;
-    letter-spacing: 0.5vh;
-}
-
-/* Layout principal: fantasma + bloque 2x2 */
-main {
-    width: 100%;
-    height: 100%;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5vw;
+    padding: 4vh 4vw;
 }
 
-/* Fantasma: grande pero más pequeño que el cuadro */
+/* Fantasma */
 .ghost img {
-    height: 40vh;
-    transform: scale(1.1);
+    height: 38vh; /* Más pequeño que el cuadro */
+    object-fit: contain;
 }
 
-/* Bloque 2x2 centrado, cuadrado y grande */
+/* Columna derecha */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+}
+
+/* Título */
+.title {
+    font-family: "Cinzel", serif;
+    font-size: 4vh;
+    letter-spacing: 0.5vh;
+    text-align: center;
+    margin-bottom: 1vh;
+}
+
+/* Cuadro 2x2 estilo Instagram */
 .grid {
-    width: 40vh;              /* mismo en ancho y alto para que sea cuadrado */
-    height: 40vh;
+    width: 65vh;   /* Opción C: 65% del alto de pantalla */
+    height: 65vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    border-radius: 2vh;
     overflow: hidden;
 }
 
-/* Cada post ocupa 1/4 del cuadro */
+/* Cada post */
 .post {
     position: relative;
-    display: block;
     width: 100%;
     height: 100%;
     text-decoration: none;
 }
 
-/* Dos fotos por post */
-.post-images {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.post-images img {
+/* Portada estilo Instagram */
+.cover {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* Hover: nombre del producto */
+/* Hover */
 .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.65);
     color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2vh;
+    font-size: 2.2vh;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .post:hover .overlay {
     opacity: 1;
+}
+
+/* Ajuste para pantallas pequeñas (sin cambiar diseño) */
+@media (max-width: 768px) {
+
+    .scene {
+        gap: 3vw;
+        padding: 2vh 2vw;
+    }
+
+    .ghost img {
+        height: 30vh;
+    }
+
+    .grid {
+        width: 55vh;
+        height: 55vh;
+    }
+
+    .title {
+        font-size: 3.2vh;
+    }
 }
