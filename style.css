@@ -13,20 +13,20 @@ body {
     position: relative;
 }
 
-/* Fondo artístico con zoom */
+/* Fondo con zoom fuerte */
 .background {
     position: absolute;
     inset: 0;
     background: url("fondo-negro.jpg") center/cover no-repeat;
     filter: brightness(0.75);
-    transform: scale(1.25); /* zoom cinematográfico */
+    transform: scale(1.35);
     z-index: -1;
 }
 
-/* Título arriba centrado */
+/* Título centrado arriba */
 header {
     position: absolute;
-    top: 3%;
+    top: 4%;
     width: 100%;
     text-align: center;
     z-index: 2;
@@ -34,49 +34,48 @@ header {
 
 header h1 {
     font-family: "Cinzel", serif;
-    font-size: 2.4rem;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
     letter-spacing: 4px;
-    color: #ffffff;
 }
 
-/* Layout principal */
+/* Layout principal: fantasma izquierda, grid centro */
 main {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 90px;
+    gap: clamp(30px, 6vw, 90px);
+    padding-inline: 20px;
 }
 
-/* Fantasma grande a la izquierda */
+/* Fantasma grande pero más pequeño que el cuadro */
 .ghost img {
-    height: 65vh;
-    transform: scale(1.15); /* efecto de cercanía */
+    height: clamp(40vh, 55vh, 60vh);
+    transform: scale(1.1);
 }
 
-/* Grid 2x2 que forma un cuadro grande */
+/* Grid 2x2 formando un solo cuadro grande */
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 260px);
-    grid-template-rows: repeat(2, 260px);
-    gap: 0; /* sin separación para que parezca un solo cuadro */
+    grid-template-columns: repeat(2, minmax(140px, 220px));
+    grid-template-rows: repeat(2, minmax(140px, 220px));
+    gap: 0;
     border-radius: 18px;
     overflow: hidden;
-    transform: scale(1.25); /* más grande que el fantasma */
+    transform: scale(1.25);
 }
 
-/* Cada post */
+/* Cada post ocupa 1/4 del cuadro */
 .post {
     position: relative;
     display: block;
-    width: 260px;
-    height: 260px;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
     text-decoration: none;
 }
 
-/* Dos fotos dentro del cuadrito */
+/* Dos fotos por post */
 .post-images {
     width: 100%;
     height: 100%;
@@ -99,11 +98,40 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3rem;
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .post:hover .overlay {
     opacity: 1;
+}
+
+/* Ajuste para móviles: todo sigue visible sin scroll */
+@media (max-width: 768px) {
+    body {
+        overflow: hidden;
+    }
+
+    main {
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        padding-top: 40px;
+    }
+
+    header {
+        top: 2%;
+    }
+
+    .ghost img {
+        height: 26vh;
+        transform: scale(1.05);
+    }
+
+    .grid {
+        transform: scale(1.05);
+        grid-template-columns: repeat(2, 140px);
+        grid-template-rows: repeat(2, 140px);
+    }
 }
