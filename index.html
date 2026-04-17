@@ -1,41 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartershop</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Cartershop</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+      font-family: "Cinzel", serif;
+    }
+
+    /* Fondo */
+    .fondo {
+      position: absolute;
+      inset: 0;
+      background: url("fondo-negro.jpg") center/cover no-repeat;
+      filter: brightness(0.55);
+    }
+
+    /* Fantasma izquierda */
+    .fantasma {
+      position: absolute;
+      left: 4%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .fantasma img {
+      height: 520px;
+      width: auto;
+    }
+
+    /* Título */
+    .titulo {
+      position: absolute;
+      top: 6%;
+      right: 14%;
+      font-size: 60px;
+      color: white;
+      font-family: "Cinzel", serif;
+      letter-spacing: 2px;
+      text-shadow: 0 0 12px rgba(0,0,0,0.8);
+    }
+
+    /* Grid 2x2 */
+    .grid {
+      position: absolute;
+      top: 22%;
+      right: 10%;
+      display: grid;
+      grid-template-columns: repeat(2, 260px);
+      grid-template-rows: repeat(2, 260px);
+      gap: 22px;
+    }
+
+    .item {
+      width: 260px;
+      height: 260px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.50; /* transparencia para ver el fondo */
+      transition: opacity 0.3s ease;
+    }
+
+    .item:hover img {
+      opacity: 0.75;
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- Fondo -->
-    <div class="background"></div>
+  <div class="fondo"></div>
 
-    <!-- Fantasma a la izquierda -->
-    <div class="ghost">
-        <img src="fantasma-solo.png" alt="Fantasma">
+  <div class="fantasma">
+    <img src="fantasma-solo.png" alt="Fantasma">
+  </div>
+
+  <div class="titulo">Cartershop</div>
+
+  <div class="grid">
+    <div class="item">
+      <a href="producto1.html"><img src="prod1a.jpg" alt="Producto 1"></a>
     </div>
 
-    <!-- Bloque 2x2 de posts a la derecha -->
-    <section class="grid">
+    <div class="item">
+      <a href="producto2.html"><img src="prod2a.jpg" alt="Producto 2"></a>
+    </div>
 
-        <a href="producto1.html" class="post">
-            <img src="prod1a.jpg" class="cover" alt="Producto 1">
-        </a>
+    <div class="item">
+      <a href="producto3.html"><img src="prod3a.jpg" alt="Producto 3"></a>
+    </div>
 
-        <a href="producto2.html" class="post">
-            <img src="prod2a.jpg" class="cover" alt="Producto 2">
-        </a>
-
-        <a href="producto3.html" class="post">
-            <img src="prod3a.jpg" class="cover" alt="Producto 3">
-        </a>
-
-        <a href="producto4.html" class="post">
-            <img src="prod4a.jpg" class="cover" alt="Producto 4">
-        </a>
-
-    </section>
+    <div class="item">
+      <a href="producto4.html"><img src="prod4a.jpg" alt="Producto 4"></a>
+    </div>
+  </div>
 
 </body>
 </html>
